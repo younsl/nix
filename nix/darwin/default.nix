@@ -25,6 +25,11 @@
 
   users.users.${user}.home = "/Users/${user}";
 
+  environment.variables = {
+    EDITOR = "vi";
+    VISUAL = "vi";
+  };
+
   programs.zsh = {
     enable = true;
     enableGlobalCompInit = false;
