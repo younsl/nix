@@ -28,6 +28,12 @@ Always-on ground rule for every file Claude writes or edits: application code, H
 - Runner labels pin an explicit OS version (`ubuntu-26.04`, `ubuntu-26.04-arm`, `macos-26`); `-latest` silently changes the OS and breaks reproducibility.
 - Binary releases build all four targets: `x86_64-unknown-linux-gnu` (ubuntu-26.04), `aarch64-unknown-linux-gnu` (ubuntu-26.04-arm) and `x86_64-apple-darwin`, `aarch64-apple-darwin` (macos-26). Container images build `linux/amd64` + `linux/arm64`.
 
+## Company Issue Tracker
+
+- Company tickets never mention github.com, the personal GitHub account, or its container registry. This covers the title, description, comments, remote links, attachments, table cells, and link marks, including advisory (GHSA), Actions run, release, and commit URLs.
+- Vulnerabilities are referenced by ID text only (`rustsec-...`, `cve-...`, `ghsa-...`), and evidence links point only to the internal merge request.
+- After creating or editing a ticket, search its title, description, and comments for `github` and expect zero matches.
+
 ## Skills Security Policy
 
 Skills live in the public younsl/skills repo on GitHub. Follow these rules when creating or modifying skills files.
