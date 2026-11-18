@@ -3,7 +3,7 @@
 set -euo pipefail
 
 REPO_DIR="${0:A:h:h:h}"
-ADDONS_DIR="$HOME/github/younsl/addons"
+CT_DIR="$HOME/github/younsl/ct"
 FLAKE="$REPO_DIR#macbook"
 NIX_BIN="/nix/var/nix/profiles/default/bin"
 ETC_SHELL_FILES=(/etc/zshrc /etc/zshenv /etc/zprofile /etc/bashrc)
@@ -62,7 +62,7 @@ darwin_switch() {
 install_precommit_hooks() {
     local precommit="/etc/profiles/per-user/$USER/bin/pre-commit"
     local repo
-    for repo in "$REPO_DIR" "$ADDONS_DIR"; do
+    for repo in "$REPO_DIR" "$CT_DIR"; do
         if [[ -e "$repo/.git" ]]; then
             (cd "$repo" && "$precommit" install)
         fi
