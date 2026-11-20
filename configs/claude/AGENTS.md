@@ -19,8 +19,8 @@ Always-on ground rule for every file Claude writes or edits: application code, H
 - Default to no comment. Add one only when the code cannot say it: a non-obvious constraint, a workaround with its cause, or a format the tooling requires (helm-docs `# --`, doc comments on public APIs, lint directives)
 - Never narrate what the next line does, restate a key or function name, or log the change history ("added for X", "changed from Y")
 - Background, rationale, and references belong in the commit message or MR body, not in code
-- Never edit or delete existing comments, upstream originals included, unless asked; this rule governs only what Claude adds
-- When editing a file, match its existing comment density rather than raising it
+- Delete existing comments in first-party files a change edits, unless one carries history or background a reader truly needs and the code cannot say, or a tool requires its format
+- Upstream and vendored text keeps its comments verbatim, so upgrade diffs stay readable
 - Required comments are one short line, no em dash, no Kubernetes or tool version notes
 
 ## GitHub Actions Conventions
