@@ -1,5 +1,8 @@
 # kavd-watchdog
 
+> [!WARNING]
+> Deprecated. Do not install this on another machine or build on it. It stays only until Kaspersky Anti-Virus for Mac is uninstalled from the machine that still runs it, and is deleted from this repository after that.
+
 A Rust LaunchDaemon that restarts the Kaspersky Anti-Virus for Mac daemon (kavd) when it stays pinned on CPU. It is a local tool and is not released.
 
 ![kavd-watchdog local architecture: nix builds the binary into the Nix store, nix-darwin writes the plist that runs it as root, launchd keeps the watchdog running, and the watchdog asks launchd to kickstart kavd after sustained high CPU](docs/assets/architecture.svg)
@@ -8,7 +11,23 @@ It stays resident and reads kavd CPU every 60 seconds, averaged over that window
 
 The binary itself is generic: `--service` names the target, and the plist sets it to kavd. Each check asks launchd for the service PID with `launchctl print`, so a look-alike process named kavd cannot trigger a restart.
 
+## Deprecated
+
+- Status: deprecated. It keeps running only on the machine where kavd is still installed, and gets no new features
+- Removal precondition: Kaspersky Anti-Virus for Mac is uninstalled, so each of these prints nothing
+
+```bash
+ls -d "/Applications/Kaspersky Anti-Virus For Mac.app"
+pgrep -lf kavd
+systemextensionsctl list | grep -i kaspersky
+```
+
+- Until then the watchdog stays. Removing it first leaves kavd pinned on CPU with nothing to restart it
+- Removal, once the precondition holds: delete this directory, nix/pkgs/kavd-watchdog.nix, nix/darwin/kavd-watchdog.nix, the import in nix/darwin/default.nix, the package line in flake.nix, and the mentions in AGENTS.md, README.md, and .pre-commit-config.yaml. Rerun the switch, which unloads the daemon and deletes its plist, then delete /var/log/kavd-watchdog.log
+
 ## Install
+
+These steps describe the existing install and are not an invitation to add one.
 
 nix-darwin installs it with the rest of the system configuration:
 
