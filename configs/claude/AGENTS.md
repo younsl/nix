@@ -23,6 +23,16 @@ Always-on ground rule for every file Claude writes or edits: application code, H
 - Upstream and vendored text keeps its comments verbatim, so upgrade diffs stay readable
 - Required comments are one short line, no em dash, no Kubernetes or tool version notes
 
+## Vulnerabilities
+
+Always-on ground rule for every artifact built from a repo: dependency lockfiles, binaries, and container images.
+
+- Zero CRITICAL and zero HIGH. `trivy fs --scanners vuln --severity HIGH,CRITICAL --exit-code 1 <project dir>` and `trivy image` with the same flags exit 0 before work is called done or released
+- No exception: never `--ignore-unfixed`, `.trivyignore`, or VEX suppression. A finding without a fixed version means replacing or dropping the dependency or base image, else the release is blocked and reported
+- A new dependency or base image is scanned before it is adopted
+- A scan that did not run is reported as not run, never as passed
+- Upstream charts and images that are only deployed are out of scope
+
 ## GitHub Actions Conventions
 
 - Runner labels pin an explicit OS version (`ubuntu-26.04`, `ubuntu-26.04-arm`, `macos-26`); `-latest` silently changes the OS and breaks reproducibility.
