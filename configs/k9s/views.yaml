@@ -118,6 +118,19 @@ views:
       - AMI SELECTOR:.spec.amiSelectorTerms[0].alias|S
       - AGE
 
+  karpenter.sh/v1/nodepools:
+    sortColumn: NAME:asc
+    columns:
+      - NAME
+      - NODECLASS
+      - NODES
+      - READY
+      - WEIGHT
+      - 'INSTANCE TYPE:.spec.template.spec.requirements[?(@.key=="node.kubernetes.io/instance-type")].values[*]|S'
+      - CPU
+      - MEMORY
+      - AGE
+
   # Shows parent gateway name and namespace for HTTPRoute routing
   gateway.networking.k8s.io/v1/httproutes:
     sortColumn: AGE:asc
