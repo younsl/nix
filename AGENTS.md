@@ -24,7 +24,6 @@ Format: TOOL TYPE(SCOPE): DETAIL, for example [nvim] feat(pack): add nvim-treesi
 - **Scripts carry no comments** and every script starts with set -euo pipefail.
 - scripts/git/commit-history-cleaner.sh and the chc alias are **destructive**: they wipe all history and force push. Never run them in this repository.
 - bootstrap.sh is #!/bin/zsh: prompts must use read "VAR?prompt". zsh's read -p reads from a coprocess and silently yields an empty value.
-- configs/launchd/kavd-watchdog is a local Rust tool, not released. It follows edition 2024, rust-version 1.99.1, cargo fmt --check, and cargo clippy -- -D warnings. nix/pkgs/kavd-watchdog.nix builds it with the toolchain named by rust-version, and nix-darwin runs it from the store as a launchd daemon.
 
 ## Shell entry points
 

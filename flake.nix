@@ -11,10 +11,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -22,15 +18,11 @@
       nixpkgs,
       nix-darwin,
       home-manager,
-      rust-overlay,
       ...
     }:
     let
       system = "aarch64-darwin";
-      overlays = [
-        rust-overlay.overlays.default
-        (import ./nix/overlays.nix)
-      ];
+      overlays = [ (import ./nix/overlays.nix) ];
       pkgs = import nixpkgs { inherit system overlays; };
 
       sudoUser = builtins.getEnv "SUDO_USER";
@@ -49,8 +41,6 @@
           ./nix/darwin
         ];
       };
-
-      packages.${system}.kavd-watchdog = pkgs.callPackage ./nix/pkgs/kavd-watchdog.nix { };
 
       formatter.${system} = pkgs.nixfmt;
     };

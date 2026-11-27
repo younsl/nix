@@ -9,9 +9,8 @@ Personal macOS configuration as a [Nix](https://github.com/NixOS/nix) flake. [ni
 ├── flake.nix          # inputs and the macbook darwin configuration
 ├── flake.lock
 ├── nix/
-│   ├── darwin/        # system defaults, Homebrew taps and casks, kavd-watchdog daemon (deprecated)
+│   ├── darwin/        # system defaults, Homebrew taps and casks
 │   ├── home/          # CLI packages, wrapped scripts, config links, oh-my-zsh
-│   ├── pkgs/          # local package builds
 │   └── overlays.nix   # fixes applied on top of nixpkgs
 ├── configs/           # config files linked into $HOME
 └── scripts/           # bootstrap and standalone scripts

@@ -2,7 +2,6 @@
 {
   imports = [
     ./homebrew.nix
-    ./kavd-watchdog.nix
   ];
 
   assertions = [
